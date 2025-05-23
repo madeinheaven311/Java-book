@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jack</title>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/global.css">
+</head>
+<body>
+
+<div class="jumbotron">
+    <h2>[1]Jack</h2>
+    <hr class="my-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8" style="border-right: 1px solid gray">
+                <section id="leftScreen" class="leftScreen"></section>
+            </div>
+            <div class="col-sm-4">
+                <section id="rightScreen" class="rightScreen"></section>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div class="input-group">
+        <label for="msgIpt"></label>
+        <input type="text" id="msgIpt" class="form-control" placeholder="输入聊天内容"/>
+        <div class="input-group-append">
+            <button class="btn btn-info" onclick="send()">发送</button>
+            <button class="btn btn-primary" onclick="online()">上线</button>
+            <button class="btn btn-danger" onclick="offline()">下线</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let socket, leftScreen, rightScreen, msgIpt;
+    let isOnline = false;
+    onload = () => {
+        leftScreen = document.querySelector('#leftScreen');
+        rightScreen = document.querySelector('#rightScreen');
+        msgIpt = document.querySelector('#msgIpt');
+        if (!WebSocket) showRightScreen('系统: 浏览器不支持WebSocket!');
+    };
+
+    function online() {
+        // 使用ws://协议连接S端，并传递Jack的用户ID过去
+        socket = new WebSocket('ws://localhost:8070/qq/1');
+        socket.onopen = () => {
+            isOnline = true;
+            showRightScreen('系统: Jack上线了');
+        }
+        socket.onclose = () => {
+            isOnline = false;
+            showRightScreen('系统: Jack下线了');
+        }
+        socket.onerror = () => {
+            isOnline = false;
+            showRightScreen('系统: Jack连接或通信异常');
+        }
+        socket.onmessage = resp => {
+            if (isOnline && resp.data) {
+                let id = resp.data.split(':')[0];
+                let msg = resp.data.split(':')[1];
+                showLeftScreen(id, msg);
+            }
+        }
+    }
+
+    function offline() {
+        socket.close();
+        isOnline = false;
+    }
+
+    function send() {
+        if (!isOnline) {
+            showRightScreen('系统: 用户未上线');
+            return;
+        }
+        if (!msgIpt.value) {
+            showRightScreen('系统: 未输入消息内容');
+            return;
+        }
+        socket.send(msgIpt.value)
+        msgIpt.value = '';
+    }
+
+    function showLeftScreen(id, content) {
+
+        // 消息来源是自己，左对齐显示
+        if (id === '1') {
+            leftScreen.innerHTML +=
+                `<div class="media" style="text-align: left; margin-top: 10px;">
+                    <img src="image/猴.jpg" class="mr-3">
+                    <div class="media-body">
+	                    <div><small>[自己]</small></div>
+	                    <div><strong>${content}</strong></div>
+                    </div>
+				</div>`;
+        }
+        // 消息来源是他人，右对齐显示
+        else {
+            leftScreen.innerHTML +=
+                `<div class="media" style="text-align: right; margin-top: 10px;">
+                    <div class="media-body">
+	                    <div><small>[${id}号用户] 发来消息: </small></div>
+                        <div><strong>${content}</strong></div>
+                    </div>
+                    <img src="image/兔.jpg" class="ml-3">
+                </div>`;
+        }
+        // 滚动条处于底部
+        leftScreen.scrollTop = leftScreen.scrollHeight;
+    }
+
+    function showRightScreen(content) {
+        rightScreen.innerHTML += content;
+        rightScreen.innerHTML += '<br/>';
+    }
+
+</script>
+</body>
+</html>

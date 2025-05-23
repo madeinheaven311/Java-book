@@ -1,0 +1,17 @@
+server:
+  port: 8085 # 端口号
+spring:
+  application:
+    name: dubbo-product # 项目名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.216.15:8848 # nacos地址
+dubbo:
+  protocol:
+    name: dubbo # 使用dubbo协议，默认
+    port: -1 # 自增内部通信端口
+  registry:
+    address: nacos://192.168.216.15:8848 # Nacos地址
+  scan:
+    base-packages: com.d4c.service.impl # 包扫描 @DubboService 注解

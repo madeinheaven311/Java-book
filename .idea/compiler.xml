@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="rocketMq" />
+        <module name="dubbo-order" />
+        <module name="Thread-Test" />
+        <module name="mybatis" />
+        <module name="nacosconfig-product" />
+        <module name="jdbc" />
+        <module name="app-02" />
+        <module name="redis" />
+        <module name="app-01" />
+        <module name="spring" />
+        <module name="springboot-monitor" />
+        <module name="GateWayOrder" />
+        <module name="dubbo-product-api" />
+        <module name="lesson-common" />
+        <module name="nacosconfig-order" />
+        <module name="Sleuth" />
+        <module name="ProtoclTest" />
+        <module name="Caffeine" />
+        <module name="Order" />
+        <module name="spring-MVC" />
+        <module name="Alipay" />
+        <module name="xxl-job" />
+        <module name="Goods" />
+        <module name="Dubbo" />
+        <module name="ShardingJDBC" />
+        <module name="SpringAI" />
+        <module name="rabbitMQ" />
+        <module name="ES" />
+        <module name="WebSocket" />
+        <module name="GateWay" />
+        <module name="spring-boot" />
+        <module name="lesson-admin" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="AliPay" target="11" />
+      <module name="CacheTest" target="11" />
+      <module name="springboot-admin" target="11" />
+      <module name="springMVC" target="1.7" />
+      <module name="xiapi" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

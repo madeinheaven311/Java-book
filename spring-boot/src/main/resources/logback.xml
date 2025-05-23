@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--定义通用日志格式模板-->
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p %4.15(%t) %c{1}.%M:%L %msg%n"/>
+
+    <!--定义日志文件: 相对位置从父项目开始，支持使用绝对路径-->
+    <property name="LOG_FILE"
+              value="D:\\Java0521\\java-book\\log\\spring-boot.log"/>
+
+    <!--定义日志文件拆分名模板-->
+    <property name="FILE_NAME_PATTERN"
+              value="D:\\Java0521\\java-book\\log\\spring-boot.%d.%i.log"/>
+
+    <!--控制台Appender: 将日志输出在控制台-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!--配置日志格式-->
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--文件Appender: 将日志输出到指定的日志文件中-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--配置日志文件位置-->
+        <file>${LOG_FILE}</file>
+        <!--配置日志格式和编码-->
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--日志文件滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件拆分名模板-->
+            <fileNamePattern>${FILE_NAME_PATTERN}</fileNamePattern>
+            <!--日志文件最长时效，单位根据日志文件拆分名自动识别，超时立刻删除多余日志-->
+            <maxHistory>30</maxHistory>
+            <!--全部日志文件最大值，如100MB，超出100MB则立刻删除多余日志-->
+            <totalSizeCap>100MB</totalSizeCap>
+            <!--每个日志文件拆分阈值，默认10MB，表示日志文件超过10M则立刻切分-->
+            <!--此处可设置为2KB以测试滚动效果-->
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+
+        <!--过滤器: 阻止INFO级别的日志-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+    </appender>
+
+    <!--根日志记录器: 对全局的启动日志和运行时日志进行记录，最低级别为INFO-->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>

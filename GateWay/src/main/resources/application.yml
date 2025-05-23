@@ -1,0 +1,24 @@
+server:
+  port: 8000 # 端口号
+
+spring:
+  application:
+    name: alibaba-gateway # 服务名
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.216.4:8848 # Nacos注册中心地址
+    gateway:
+      routes:
+        - id: gateway-order-route # 订单微服务路由唯一标识，名称随意，不重复即可
+          uri: lb://gateway-order # 设置转发到订单微服务，`lb://` 表示负载均衡
+          order: 1 # 设置路由优先级，数字越小级别越高
+          predicates: # 设置断言，即转发前的条件判断，其值是一个数组
+            - Path=/order-app/** # URL请求满足此格式时，断言配置才能生效
+          filters:
+            - AddRequestHeader=a,1 # 为原请求添加Header键值对a=1
+            - AddRequestParameter=b,2 # 为原请求添加请求参数键值对b=2
+            - AddResponseHeader=c,3 # 为原响应添加Header键值对c=3
+            - SetResponseHeader=d,4 # 修改原响应Header中d的值为4
+            - SetStatus=2000 # 修改原始响应的状态码为2000
+            - Req=true,true # 自定义过滤器配置

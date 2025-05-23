@@ -1,0 +1,60 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+
+  <!--编码过滤器-->
+  <filter>
+    <!--配对名，可随意更改,与filter-mapping配对-->
+    <filter-name>characterEncodingFilter</filter-name>
+    <!--过滤器类全名-->
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <!--配对名，可随意更改，与filter-name配对-->
+    <filter-name>characterEncodingFilter</filter-name>
+    <!--拦截全部请求且严格区分后缀，即 `/a.html` 和 `/a` 是不同的两种请求-->
+    <url-pattern>/*</url-pattern>
+
+  </filter-mapping>
+
+
+
+  <!--SpringMVC前端控制器-->
+  <servlet>
+    <!--配对名，可随意更改-->
+    <servlet-name>dispatcherServlet</servlet-name>
+    <!--前端控制器类全名-->
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <!--SpringMVC主配: 默认寻找 `/WEB-INF/配对名-servlet.xml`-->
+      <param-value>classpath:springmvc.xml</param-value>
+    </init-param>
+    <!--Servlet加载顺序-->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <!--配对名，可随意更改-->
+    <servlet-name>dispatcherServlet</servlet-name>
+    <!--拦截全部请求并忽略后缀，比如将 `/a.html` 视为 `/a` 请求-->
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+
+
+  <!--首页文件列表-->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>

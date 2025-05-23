@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.d4c.www.mapper.DeptMapper">
+
+    <!--二级缓存配置-->
+    <cache readOnly="true"/>
+
+    <!--重用SQL片段: [部门表] 全查片段-->
+    <sql id="list">
+        select d.dept_id, d.dept_name
+        from springboot.dept d
+    </sql>
+
+    <!--按条件查询 [部门] 记录-->
+    <select id="select" resultType="Dept">
+        <include refid="list"/>
+        <where>
+            <if test="deptId != null">and dept_id = #{deptId}</if>
+            <if test="deptName != null">and dept_name = #{deptName}</if>
+        </where>
+    </select>
+
+    <select id="selectAll" resultType="Dept" >
+        select *
+        from springboot.dept d
+    </select>
+
+</mapper>

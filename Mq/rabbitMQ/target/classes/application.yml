@@ -1,0 +1,11 @@
+server:
+  port: 8212 # 项目端口号
+spring:
+  application:
+    name: rabbitmq # 项目名
+  rabbitmq:
+    host: 192.168.216.15 # RabbitMQ服务端IP地址
+    port: 5672 # RabbitMQ端口号
+    virtual-host: /myHost # RabbitMQ主机
+    username: D4C # RabbitMQ账号
+    password: D4C # RabbitMQ密码

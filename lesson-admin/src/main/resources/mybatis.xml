@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--从classpath下引入属性文件，不支持 `classpath:` 前缀，后期由Spring代劳-->
+    <properties resource="db.properties"/>
+
+    <!--全局配置-->
+    <settings>
+        <!--执行器类型-->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <!--下划线转小驼峰-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--控制台打印SQL语句-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--开启二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--关闭积极加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <!--整包起别名: 别名不区分大小写-->
+    <typeAliases>
+        <package name="com.d4c.www.entity"/>
+    </typeAliases>
+
+    <!--环境列表标签: 支持配置多环境-->
+    <environments default="test">
+        <!--环境标签: 使用JDBC事务（支持提交回滚）/ 使用POOLED连接池-->
+        <environment id="test">
+            <!--配置该环境使用JDBC事务管理类，此事务支持提交和回滚-->
+            <transactionManager type="JDBC"/>
+            <!--配置该环境使用POOLED连接池，需注入数据源四项-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--在Mapper接口和配置文件同名同包时，整包扫描Mapper接口-->
+        <!--建立连接时，只扫描了主配文件，所以需要扫描Mapper接口，才能使用里面的数据库操作-->
+        <package name="com.d4c.www.mapper"/>
+    </mappers>
+
+</configuration>

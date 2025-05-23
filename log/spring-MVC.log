@@ -1,0 +1,1 @@
+2024-01-08 15:48:09.269 WARN  nio-8010-exec-4 o.s.w.s.m.s.DefaultHandlerExceptionResolver.logException:199 Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]

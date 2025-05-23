@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd"
+       >
+
+    <context:component-scan base-package="com.d4c.www"/>
+
+    <!--AOP配置区域: 切点和切面类都在此标签内配置-->
+    <aop:config>
+        <!--配置切点，并通过PE表达式指定范围-->
+        <aop:pointcut id="pc01" expression="execution(* com.d4c.www.aspect..*.*(..))"/>
+        <!--配置切面类-->
+        <aop:aspect ref="myAspect">
+            <!--前置通知方法: 指定方法名和切点-->
+            <aop:before method="beforeAdvice" pointcut-ref="pc01"/>
+            <!--后置通知方法: 指定方法名和切点-->
+            <aop:after method="afterAdvice" pointcut-ref="pc01"/>
+            <!--异常通知方法: 指定方法名，异常参数名和切点-->
+            <aop:after-throwing method="afterThrowingAdvice" throwing="ex" pointcut-ref="pc01"/>
+            <!--返回通知方法: 指定方法名，返回值参数名和切点-->
+            <aop:after-returning method="afterReturningAdvice" returning="dog" pointcut-ref="pc01"/>
+            <!--环绕通知方法: 指定方法名，返回值参数名和切点-->
+            <aop:around method="aroundAdvice" pointcut-ref="pc01"/>
+        </aop:aspect>
+
+    </aop:config>
+
+
+    <bean id="dog" class="com.d4c.www.entity.Dog">
+        <constructor-arg index="0" name="gender" value="公"/>
+        <constructor-arg index="1" name="breeds" value="金毛"/>
+        <property name="dogName" value="欧迪"/>
+        <property name="dogAge" value="5"/>
+        <property name="hobby">
+            <list>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--管理Bat实例-->
+    <bean class="com.d4c.www.entity.Bat" init-method="init" destroy-method="destroy"/>
+
+    <!--管理前后置处理器-->
+    <bean class="com.d4c.www.processor.MyBeanPostProcessor"/>
+
+    <!--管理Mouse实例: 使用静态工厂模式-->
+    <bean id="mouse" class="com.d4c.www.factory.MouseFactory" factory-method="getInstance"/>
+
+    <!--管理MyAspect实例，测试spring通知功能-->
+    <bean id="myAspect" class="com.d4c.www.aspect.MyAspect"/>
+
+</beans>

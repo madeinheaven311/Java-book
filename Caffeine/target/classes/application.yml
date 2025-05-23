@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: singleDatabaseApplication
+#  cache:
+#    cache-names: cache1
+#    caffeine:
+#      spec: expireAfterWrite=10s,initialCapacity=50,maximumSize=100
+server:
+  port: 8099
+
+logging:
+  level:
+    org.springframework.cache: INFO
+    org.springframework.cache.interceptor: INFO
+    org.springframework.cache.annotation: INFO
+
+
+############################# StringRedisTemplate ##############################
+#RedisIP，Redis端口，超时毫秒数，最大连接，最大阻塞时间，最大空闲，最小空闲#
+  spring:
+    redis:
+      host: 192.168.216.15
+      port: 6379
+      timeout: 3000ms
+      jedis:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0

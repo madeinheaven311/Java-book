@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.d4c.www.mapper.OrderMapper">
+
+
+    <!--重用SQL片段: Order表全查片段-->
+    <sql id="list">
+        select
+        o.order_id, o.order_number, o.total_fee, o.order_info,
+        o.order_deleted, o.create_time, o.modify_time
+        from lesson.order o
+    </sql>
+
+    <!--添加Order记录-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="orderId">
+        insert into lesson.order (
+        order_number, total_fee, order_info, order_deleted, create_time, modify_time )
+        values (
+        #{orderNumber}, #{totalFee}, #{orderInfo}, #{orderDeleted},
+        #{createTime}, #{modifyTime} )
+    </insert>
+
+    <!--按条件查询Order记录-->
+    <select id="select" resultType="Order">
+        <include refid="list"/>
+        <where>
+            <if test="orderId != null">and o.order_Id = #{orderId}</if>
+            <if test="orderNumber != null">and o.order_number = #{orderNumber}</if>
+            <if test="totalFee != null">and o.total_fee = #{totalFee}</if>
+            <if test="orderInfo != null">and o.order_info = #{orderInfo}</if>
+            <if test="orderDeleted != null">and o.order_deleted = #{orderDeleted}</if>
+            <if test="createTime != null">and o.create_time = #{createTime}</if>
+            <if test="modifyTime != null">and o.modify_time = #{modifyTime}</if>
+        </where>
+    </select>
+
+    <!--按条件修改Order记录-->
+    <update id="update">
+        update lesson.order
+        <set>
+            <if test="param1.orderId != null">order_id = #{param1.orderId},</if>
+            <if test="param1.orderNumber != null">order_number = #{param1.orderNumber},</if>
+            <if test="param1.totalFee != null">total_fee = #{param1.totalFee},</if>
+            <if test="param1.orderInfo != null">order_info = #{param1.orderInfo},</if>
+            <if test="param1.orderDeleted != null">order_deleted = #{param1.orderDeleted},</if>
+            <if test="param1.createTime != null">create_time = #{param1.createTime},</if>
+            <if test="param1.modifyTime != null">modify_time = #{param1.modifyTime},</if>
+        </set>
+        <where>
+            <choose>
+                <when test="param2.orderId != null">and order_Id = #{param2.orderId}</when>
+                <when test="param2.orderNumber != null">and order_number = #{param2.orderNumber}</when>
+                <when test="param2.totalFee != null">and total_fee = #{param2.totalFee}</when>
+                <when test="param2.orderInfo != null">and order_info = #{param2.orderInfo}</when>
+                <when test="param2.orderDeleted != null">and order_deleted= #{param2.orderDeleted}</when>
+                <when test="param2.createTime != null">and create_time = #{param2.createTime}</when>
+                <when test="param2.modifyTime != null">and modify_time = #{param2.modifyTime}</when>
+                <otherwise>or 1 = 2</otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--按条件删除Order记录-->
+    <delete id="delete">
+        delete from lesson.order
+        <where>
+            <choose>
+                <when test="orderId != null">and order_Id = #{orderId}</when>
+                <when test="orderNumber != null">and order_number = #{orderNumber}</when>
+                <when test="totalFee != null">and total_fee = #{totalFee}</when>
+                <when test="orderInfo != null">and order_info = #{orderInfo}</when>
+                <when test="orderDeleted != null">and order_deleted = #{orderDeleted}</when>
+                <when test="createTime != null">and create_time = #{createTime}</when>
+                <when test="modifyTime != null">and modify_time = #{modifyTime}</when>
+                <otherwise>or 1 = 2</otherwise>
+            </choose>
+        </where>
+    </delete>
+
+    <!--按Order主键数组批量删除多条Order记录-->
+    <delete id="deleteByOrderIds">
+        delete from lesson.order where order_id in
+        <foreach collection="array" item="orderId" open="(" close=")" separator=",">
+            ${orderId}
+        </foreach>
+    </delete>
+
+    <!--按Order主键查询Order记录（分步专用）-->
+    <select id="selectByOrderId" resultType="Order">
+        <include refid="list"/>
+        where o.order_id = #{param1} and o.order_deleted = 0
+    </select>
+
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.d4c.www.mapper.ChapterMapper">
+
+
+    <!--引入BannerMapper的二级缓存配置-->
+    <cache-ref namespace="com.joezhou.mapper.BannerMapper"/>
+
+    <!--重用SQL片段: Chapter表全查片段-->
+    <sql id="list">
+        select
+        c.chapter_id, c.chapter_title, c.chapter_info, c.chapter_index, c.fk_video_id,
+        c.create_time, c.modify_time
+        from lesson.chapter c
+    </sql>
+
+    <!--分步查询SQL块-->
+    <resultMap id="selectMap" type="Chapter">
+        <id property="chapterId" column="chapter_id"/>
+        <result property="fkVideoId" column="fk_video_id"/>
+        <association property="video" column="fk_video_id"
+                     select="com.joezhou.mapper.VideoMapper.selectByVideoId"/>
+    </resultMap>
+
+    <!--添加Chapter记录-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="chapterId">
+        insert into lesson.chapter (
+        chapter_title, chapter_info, chapter_index, fk_video_id, create_time, modify_time )
+        values (
+        #{chapterTitle}, #{chapterInfo}, #{chapterIndex}, #{fkVideoId},
+        #{createTime}, #{modifyTime} )
+    </insert>
+
+    <!--按条件查询Chapter记录-->
+    <select id="select" resultMap="selectMap">
+        <include refid="list"/>
+        <where>
+            <if test="chapterId != null">and c.chapter_id = #{chapterId}</if>
+            <if test="chapterTitle != null">and c.chapter_title = #{chapterTitle}</if>
+            <if test="chapterInfo != null">and c.chapter_info = #{chapterInfo}</if>
+            <if test="chapterIndex != null">and c.chapter_index = #{chapterIndex}</if>
+            <if test="fkVideoId != null">and c.fk_video_id = #{fkVideoId}</if>
+            <if test="createTime != null">and c.create_time = #{createTime}</if>
+            <if test="modifyTime != null">and c.modify_time = #{modifyTime}</if>
+        </where>
+        order by c.chapter_index, c.create_time desc
+    </select>
+
+    <!--按条件修改Chapter记录-->
+    <update id="update">
+        update lesson.chapter
+        <set>
+            <if test="param1.chapterId != null">chapter_id = #{param1.chapterId},</if>
+            <if test="param1.chapterTitle != null">chapter_title = #{param1.chapterTitle},</if>
+            <if test="param1.chapterInfo != null">chapter_info = #{param1.chapterInfo},</if>
+            <if test="param1.chapterIndex != null">chapter_index = #{param1.chapterIndex},</if>
+            <if test="param1.fkVideoId != null">fk_video_id = #{param1.fkVideoId},</if>
+            <if test="param1.createTime != null">create_time = #{param1.createTime},</if>
+            <if test="param1.modifyTime != null">modify_time = #{param1.modifyTime},</if>
+        </set>
+        <where>
+            <choose>
+                <when test="param2.chapterId != null">and chapter_id = #{param2.chapterId}</when>
+                <when test="param2.chapterTitle != null">and chapter_title= #{param2.chapterTitle}</when>
+                <when test="param2.chapterInfo != null">and chapter_info = #{param2.chapterInfo}</when>
+                <when test="param2.chapterIndex != null">and chapter_index= #{param2.chapterIndex}</when>
+                <when test="param2.fkVideoId != null">and fk_video_id = #{param2.fkVideoId}</when>
+                <when test="param2.createTime != null">and create_time = #{param2.createTime}</when>
+                <when test="param2.modifyTime != null">and modify_time = #{param2.modifyTime}</when>
+                <otherwise>or 1 = 2</otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--按条件删除Chapter记录-->
+    <delete id="delete">
+        delete from lesson.chapter
+        <where>
+            <choose>
+                <when test="chapterId != null">and chapter_id = #{chapterId}</when>
+                <when test="chapterTitle != null">and chapter_title = #{chapterTitle}</when>
+                <when test="chapterInfo != null">and chapter_info = #{chapterInfo}</when>
+                <when test="chapterIndex != null">and chapter_index = #{chapterIndex}</when>
+                <when test="fkVideoId != null">and fk_video_id = #{fkVideoId}</when>
+                <when test="createTime != null">and create_time = #{createTime}</when>
+                <when test="modifyTime != null">and modify_time = #{modifyTime}</when>
+                <otherwise>or 1 = 2</otherwise>
+            </choose>
+        </where>
+    </delete>
+
+    <!--按Chapter主键数组批量删除多条Chapter记录-->
+    <delete id="deleteByChapterIds">
+        delete from lesson.chapter where chapter_id in
+        <foreach collection="array" item="chapterId" open="(" close=")" separator=",">
+            ${chapterId}
+        </foreach>
+    </delete>
+
+    <!--按Chapter主键查询Chapter记录（分步专用）-->
+    <select id="selectByChapterId" resultMap="selectMap">
+        <include refid="list"/> where c.chapter_id = #{param1}
+    </select>
+
+
+</mapper>

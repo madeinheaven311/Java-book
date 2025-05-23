@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.d4c.www.mapper.EmpMapper">
+
+    <!--二级缓存配置-->
+    <cache readOnly="true"/>
+
+    <!--重用SQL片段: [部门表] 全查片段-->
+    <sql id="list">
+        select d.dept_id, d.dept_name
+        from springboot.dept d
+    </sql>
+
+    <!--按条件查询员工记录-->
+    <select id="select" resultType="Emp">
+        select * from springboot.emp
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="name != null">and name = #{name}</if>
+            <if test="age >0">and age = #{age}</if>
+            <if test="fkDeptId != null">and fk_dept_id = #{fkDeptId}</if>
+        </where>
+    </select>
+
+
+    <select id="selectAll" resultType="Emp">
+        select * from springboot.emp
+    </select>
+
+
+    <!--按条件删除员工记录-->
+    <delete id="delete">
+        delete from springboot.emp
+        <where>
+            <if test="id != null"> and id = #{id}</if>
+            <if test="name != null"> and name = #{name}</if>
+            <if test="age >0"> and age = #{age}</if>
+            <if test="fkDeptId != null"> and fk_dept_id = #{fkDeptId}</if>
+
+        </where>
+    </delete>
+
+    <!--按条件修改班级记录-->
+    <update id="update" >
+        update springboot.emp
+        <set>
+            <if test="param1.name != null">name = #{param1.name},</if>
+            <if test="param1.age >0">age = #{param1.age},</if>
+            <if test="param1.fkDeptId != null">fk_dept_id = #{param1.fkDeptId},</if>
+            <if test="param1.updated != null">updated = #{param1.updated},</if>
+        </set>
+        <where>
+            <if test="param2.id != null"> and id = #{param2.id}</if>
+            <if test="param2.name != null"> and name = #{param2.name}</if>
+            <if test="param2.age >0"> and age = #{param2.age}</if>
+            <if test="param2.fkDeptId != null"> and fk_dept_id = #{param2.fkDeptId}</if>
+        </where>
+    </update>
+
+
+
+</mapper>

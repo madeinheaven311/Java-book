@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: nacosconfig-product # 项目名称
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml # NacosConfig配置文件后缀
+        server-addr: 192.168.216.15:8848 # NacosConfig配置中心地址
+        group: alibaba # NacosConfig配置文件分组
+        shared-configs:
+          - group: alibaba # NacosConfig配置文件分组
+            data-id: nacosconfig.yaml # 配置文件名
+            refresh: true # 是否动态刷新，默认为false
+  profiles:
+    active: test # 当前开发环境，决定了使用NacosConfig中，哪个环境的配置文件
+logging:
+  level:
+    com.alibaba.nacos.client.naming: warn # 忽略NacosConfig无限心跳检测日志，可选

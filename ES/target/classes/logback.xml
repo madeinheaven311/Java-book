@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--定义通用日志格式模板-->
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p %4.15(%t) %c{1}.%M:%L %msg%n"/>
+
+    <!--控制台Appender: 将日志输出在控制台-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!--配置日志格式-->
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--LogStashAppender: 将日志输出到指定的LogStash中-->
+    <appender name="LOGSTASH"
+              class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!--logStash的服务地址和端口-->
+        <destination>192.168.216.15:4560</destination>
+        <!--编码器-->
+        <encoder charset="UTF-8"
+                 class="net.logstash.logback.encoder.LogstashEncoder"/>
+        <!--过滤器: 阻止INFO级别的日志-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+    </appender>
+
+    <!--根日志记录器: 对全局的启动日志和运行时日志进行记录，最低级别为INFO-->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOGSTASH"/>
+    </root>
+
+</configuration>

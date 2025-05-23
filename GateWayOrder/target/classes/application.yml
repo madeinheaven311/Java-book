@@ -1,0 +1,9 @@
+server:
+  port: 8089 # 端口号
+spring:
+  application:
+    name: gateway-order # 项目名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.216.4:8848 # Nacos服务地址，集群用逗号分隔

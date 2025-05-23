@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.d4c.www.mapper.BannerMapper">
+
+    <!--二级缓存配置-->
+    <cache readOnly="true"/>
+
+    <!--添加Banner记录-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="bannerId">
+        insert into lesson.banner (
+        banner_url, banner_index, create_time, modify_time )
+        values (
+        #{bannerUrl}, #{bannerIndex}, #{createTime}, #{modifyTime} )
+    </insert>
+
+    <select id="select" resultType="Banner">
+        select banner_id, banner_url, banner_index, create_time, modify_time
+        from lesson.banner
+        <where>
+            <if test="bannerId != null "> and banner_id = #{bannerId} </if>
+            <if test="bannerUrl != null "> and banner_url = #{bannerUrl} </if>
+            <if test="bannerIndex != null "> and banner_index = #{bannerIndex} </if>
+            <if test="createTime != null "> and create_time = #{createTime} </if>
+            <if test="modifyTime != null "> and modify_time = #{modifyTime} </if>
+        </where>
+        order by banner_index, create_time desc
+    </select>
+
+
+    <!--按条件修改Banner记录-->
+    <update id="update">
+        update lesson.banner
+        <set>
+            <if test="param1.bannerUrl != null">banner_url = #{param1.bannerUrl},</if>
+            <if test="param1.bannerIndex != null">banner_index = #{param1.bannerIndex},</if>
+            <if test="param1.createTime != null">create_time = #{param1.createTime},</if>
+            <if test="param1.modifyTime != null">modify_time = #{param1.modifyTime},</if>
+        </set>
+        <where>
+            <if test="param2.bannerId != null">and banner_id = #{param2.bannerId} </if>
+            <if test="param2.bannerIndex != null">and banner_index = #{param2.bannerIndex} </if>
+            <if test="param2.createTime != null">and create_time = #{param2.createTime} </if>
+            <if test="param2.modifyTime != null">and modify_time = #{param2.modifyTime} </if>
+            or 1 = 2
+        </where>
+    </update>
+
+    <!--按条件删除Banner记录-->
+    <delete id="delete">
+        delete from lesson.banner
+        <where>
+            <if test="bannerId != null">and banner_id = #{bannerId} </if>
+            <if test="bannerIndex != null">and banner_index = #{bannerIndex} </if>
+            <if test="createTime != null">and create_time = #{createTime} </if>
+            <if test="modifyTime != null">and modify_time = #{modifyTime} </if>
+            or 1 = 2
+        </where>
+    </delete>
+
+    <!--按Banner主键数组批量删除多条Banner记录-->
+    <delete id="deleteByBannerIds">
+        delete from lesson.banner where banner_id in
+        <foreach collection="array" item="bannerId" open="(" close=")" separator=",">
+            ${bannerId}
+        </foreach>
+    </delete>
+
+</mapper>

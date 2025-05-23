@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--加载properties类型的属性文件-->
+    <context:property-placeholder location="classpath:db.properties"/>
+
+    <!--管理Druid连接池类: 数据源使用Druid连接池-->
+        <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+            <property name="username" value="${jdbc.username}"/>
+            <property name="password" value="${jdbc.password}"/>
+            <property name="driverClassName" value="${jdbc.driver}"/>
+            <property name="url" value="${jdbc.url}"/>
+        </bean>
+
+        <bean id="sqlSessionFactory" name="testSessionFactory"
+            class="org.mybatis.spring.SqlSessionFactoryBean">
+            <property name="dataSource" ref="druidDataSource"/>
+            <property name="configuration" value="classpath:spring-mybatis.xml"/>
+            <property name="typeAliasesPackage" value="com.d4c.www.entity"/>
+        </bean>
+</beans>

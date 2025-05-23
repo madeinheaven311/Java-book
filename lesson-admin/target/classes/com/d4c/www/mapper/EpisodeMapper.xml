@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.d4c.www.mapper.EpisodeMapper">
+
+    <!--重用SQL片段: Episode表全查片段-->
+    <sql id="list">
+      select
+        e.episode_id, e.episode_title, e.episode_info, e.episode_url, e.episode_index,
+        e.fk_chapter_id, e.create_time, e.modify_time
+      from lesson.episode e
+  </sql>
+
+    <!--分步查询SQL块-->
+    <resultMap id="selectMap" type="Episode">
+        <id property="episodeId" column="episode_id"/>
+        <result property="fkChapterId" column="fk_chapter_id"/>
+        <association property="chapter" column="fk_chapter_id"
+                     select="com.joezhou.mapper.ChapterMapper.selectByChapterId"/>
+    </resultMap>
+
+    <!--添加Episode记录-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="episodeId">
+      insert into lesson.episode (
+        episode_title, episode_info, episode_url, episode_index, fk_chapter_id,
+        create_time, modify_time )
+      values (
+        #{episodeTitle}, #{episodeInfo}, #{episodeUrl}, #{episodeIndex}, #{fkChapterId},
+        #{createTime}, #{modifyTime} )
+  </insert>
+
+    <!--按条件查询Episode记录-->
+    <select id="select" resultMap="selectMap">
+        <include refid="list"/>
+        <where>
+            <if test="episodeId != null">and e.episode_id = #{episodeId}</if>
+            <if test="episodeTitle != null">and e.episode_title = #{episodeTitle}</if>
+            <if test="episodeInfo != null">and e.episode_info = #{episodeInfo}</if>
+            <if test="episodeUrl != null">and e.episode_url = #{episodeUrl}</if>
+            <if test="episodeIndex != null">and e.episode_index = #{episodeIndex}</if>
+            <if test="fkChapterId != null">and e.fk_chapter_id = #{fkChapterId}</if>
+            <if test="createTime != null">and e.create_time = #{createTime}</if>
+            <if test="modifyTime != null">and e.modify_time = #{modifyTime}</if>
+        </where>
+        order by e.episode_index, e.create_time desc
+    </select>
+
+    <!--按条件修改Episode记录-->
+    <update id="update">
+        update lesson.episode
+        <set>
+            <if test="param1.episodeId != null">episode_id = #{param1.episodeId},</if>
+            <if test="param1.episodeTitle != null">episode_title = #{param1.episodeTitle},</if>
+            <if test="param1.episodeInfo != null">episode_info = #{param1.episodeInfo},</if>
+            <if test="param1.episodeUrl != null">episode_url = #{param1.episodeUrl},</if>
+            <if test="param1.episodeIndex != null">episode_index = #{param1.episodeIndex},</if>
+            <if test="param1.fkChapterId != null">fk_chapter_id = #{param1.fkChapterId},</if>
+            <if test="param1.createTime != null">create_time = #{param1.createTime},</if>
+            <if test="param1.modifyTime != null">modify_time = #{param1.modifyTime},</if>
+        </set>
+        <where>
+            <choose>
+                <when test="param2.episodeId != null">and episode_id = #{param2.episodeId}</when>
+                <when test="param2.episodeTitle != null">and episode_title=#{param2.episodeTitle}</when>
+                <when test="param2.episodeInfo != null">and episode_info = #{param2.episodeInfo}</when>
+                <when test="param2.episodeUrl != null">and episode_url = #{param2.episodeUrl}</when>
+                <when test="param2.episodeIndex != null">and episode_index=#{param2.episodeIndex}</when>
+                <when test="param2.fkChapterId != null">and fk_chapter_id = #{param2.fkChapterId}</when>
+                <when test="param2.createTime != null">and create_time = #{param2.createTime}</when>
+                <when test="param2.modifyTime != null">and modify_time = #{param2.modifyTime}</when>
+                <otherwise>or 1 = 2</otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--按条件删除Episode记录-->
+    <delete id="delete">
+        delete from lesson.episode
+        <where>
+            <choose>
+                <when test="episodeId != null">and episode_id = #{episodeId}</when>
+                <when test="episodeTitle != null">and episode_title = #{episodeTitle}</when>
+                <when test="episodeInfo != null">and episode_info = #{episodeInfo}</when>
+                <when test="episodeUrl != null">and episode_url = #{episodeUrl}</when>
+                <when test="episodeIndex != null">and episode_index = #{episodeIndex}</when>
+                <when test="fkChapterId != null">and fk_chapter_id = #{fkChapterId}</when>
+                <when test="createTime != null">and create_time = #{createTime}</when>
+                <when test="modifyTime != null">and modify_time = #{modifyTime}</when>
+                <otherwise>or 1 = 2</otherwise>
+            </choose>
+        </where>
+    </delete>
+
+    <!--按Episode主键数组批量删除多条Episode记录-->
+    <delete id="deleteByEpisodeIds">
+        delete from lesson.episode where episode_id in
+        <foreach collection="array" item="episodeId" open="(" close=")" separator=",">
+            ${episodeId}
+        </foreach>
+    </delete>
+
+</mapper>

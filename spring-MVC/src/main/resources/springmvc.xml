@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--根标签-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--引入Spring主配: 此时服务器在启动时只需加载springmvc的主配即可-->
+    <!--<import resource="classpath:spring.xml"/>-->
+
+    <!--注解驱动: 管理映射器和适配器，即自动生成两个组件的bean配置-->
+    <mvc:annotation-driven/>
+
+    <!--管理视图解析器类-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--响应视图的前缀-->
+        <property name="prefix" value="/view/"/>
+        <!--响应视图的后缀-->
+        <property name="suffix" value=".html"/>
+    </bean>
+
+    <!--让SpringMVC不处理css/js/html/图片/视频等静态资源-->
+    <mvc:default-servlet-handler/>
+
+
+    <!--扫描指定包及其子包下的 @Component 注解-->
+    <context:component-scan base-package="com.d4c.controller"/>
+
+</beans>

@@ -1,0 +1,6 @@
+2023-12-17 17:14:11.087 WARN  nio-8010-exec-1 c.d.c.LogBackController.logBack:19 WARN级别日志
+2023-12-17 17:14:11.088 ERROR nio-8010-exec-1 c.d.c.LogBackController.logBack:20 ERROR级别日志
+2023-12-17 17:15:00.749 WARN  nio-8010-exec-3 c.d.c.LogBackController.logBack:19 WARN级别日志
+2023-12-17 17:15:00.749 ERROR nio-8010-exec-3 c.d.c.LogBackController.logBack:20 ERROR级别日志
+2023-12-17 17:17:29.628 WARN  nio-8010-exec-1 c.d.c.LogBackController.logBack:19 WARN级别日志
+2023-12-17 17:17:29.628 ERROR nio-8010-exec-1 c.d.c.LogBackController.logBack:20 ERROR级别日志

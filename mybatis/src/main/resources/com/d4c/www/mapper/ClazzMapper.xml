@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--使mapper文件对应上接口-->
+<mapper namespace="com.d4c.www.mapper.ClazzMapper">
+
+    <cache/>
+<!--sql语句复用,提出来，使用include引用-->
+    <sql id="select">
+        select c.clazz_id, c.clazz_name, c.create_time, c.modify_time
+        from mybatis.clazz c
+    </sql>
+    
+    <select id="select" resultType="Clazz">
+        select c.clazz_id, c.clazz_name, c.create_time, c.modify_time
+        from mybatis.clazz c
+        <where>
+            <if test = "clazzId != null">and c.clazz_id = #{clazzId}</if>
+            <if test = "clazzName != null">and c.clazz_name = #{clazzName}</if>
+            <if test = "createTime != null">and c.create_time = #{createTime}</if>
+            <if test = "modifyTime != null">and c.modify_time = #{modifyTime}</if>
+        </where>
+
+    </select>
+
+
+    <resultMap id="selectPlusMap" type="Clazz">
+        <id property="clazzId" column="clazz_id"/>
+        <result property="clazzName" column="clazz_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="modifyTime" column="modify_time"/>
+        <collection property="students" column="clazz_id" ofType="Student" jdbcType="INTEGER">
+            <id property="studentId" column="student_id"/>
+            <result property="realName" column="real_name"/>
+            <result property="gender" column="gender"/>
+            <result property="phone" column="phone"/>
+            <result property="clazzId" column="clazz_id"/>
+            <result property="createTime" column="create_time"/>
+            <result property="modifyTime" column="modify_time"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectPlus" resultMap="selectPlusMap">
+        select
+        c.clazz_id, c.clazz_name, c.create_time, c.modify_time,
+        s.student_id, s.real_name, s.gender, s.phone, s.clazz_id, s.create_time, s.modify_time
+        from mybatis.clazz c
+         left join mybatis.student s on c.clazz_id = s.clazz_id
+        <where>
+            <if test = "clazzId != null">and c.clazz_id = #{clazzId}</if>
+            <if test = "clazzName != null">and c.clazz_name = #{clazzName}</if>
+            <if test = "createTime != null">and c.create_time = #{createTime}</if>
+            <if test = "modifyTime != null">and c.modify_time = #{modifyTime}</if>
+        </where>
+
+
+    </select>
+
+<!--多表查询，分步查询-->
+    <resultMap id="selectByStepMap" type="Clazz">
+        <id property="clazzId" column="clazz_id"/>
+        <collection property="students" column="clazz_id" ofType="Student" jdbcType="INTEGER"
+                        select="com.d4c.www.mapper.StudentMapper.selectByClazzId"/>
+    </resultMap>
+
+    <select id="selectByStep" resultMap="selectByStepMap">
+        select
+        c.clazz_id, c.clazz_name, c.create_time, c.modify_time,
+        from mybatis.clazz c
+        <where>
+            <if test = "clazzId != null">and c.clazz_id = #{clazzId}</if>
+            <if test = "clazzName != null">and c.clazz_name = #{clazzName}</if>
+            <if test = "createTime != null">and c.create_time = #{createTime}</if>
+            <if test = "modifyTime != null">and c.modify_time = #{modifyTime}</if>
+        </where>
+
+
+    </select>
+
+<!--用于分步查询，接收student中的查询传来的clazzId做主键查询,student->clazz -->
+    <select id="selectByClazzId" resultType="Clazz">
+        select clazz_id, clazz_name, create_time, modify_time
+        from mybatis.clazz
+        where clazz_id = {#clazzId}
+    </select>
+
+    <!--开启主键回注功能并配置注回哪一个字段-->
+    <!--DML操作无返回值类型，DQL有返回值-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="ClazzId">
+        insert into mybatis.clazz
+        (clazz_name,create_time,modify_time)
+        values
+        (#{clazzName},#{createTime},#{modifyTime})
+    </insert>
+    
+    <update id="update">
+        update mybatis.clazz c
+        <set>
+            <if test = "param1.clazzId != null">c.clazz_id = #{param1.clazzId},</if>
+            <if test = "param1.clazzName != null">c.clazz_name = #{param1.clazzName},</if>
+            <if test = "param1.createTime != null">c.create_time= #{param1.createTime},</if>
+            <if test = "param1.modifyTime != null">c.modify_time= #{param1.modifyTime},</if>
+        </set>
+
+        <where>
+            <choose>
+                <when test = "param2.clazzId != null">and c.clazz_id = #{param2.clazzId}</when>
+                <when test = "param2.clazzName != null">and c.clazz_name= #{param2.clazzName}</when>
+                <when test = "param2.createTime != null">and c.create_time = #{param2.createTime}</when>
+                <when test = "param2.modifyTime != null">and c.modify_time = #{param2.modifyTime}</when>
+                <otherwise> and 1 = 2 </otherwise>
+            </choose>
+
+        </where>
+
+    </update>
+
+    <delete id="delete">
+        delete
+        from mybatis.clazz c
+        <where>
+            <if test = "clazzId != null">and c.clazz_id = #{clazzId}</if>
+            <if test = "clazzName != null">and c.clazz_name = #{clazzName}</if>
+            <if test = "createTime != null">and c.create_time = #{createTime}</if>
+            <if test = "codifyTime != null">and c.modify_time = #{modifyTime}</if>
+        </where>
+    </delete>
+
+<!--批量删除，按主键，使用foreach遍历-->
+    <delete id="BatchDelete">
+        delete
+        from mybatis.clazz
+        <where>
+            <foreach collection="array"
+                     item="element"
+                     open="clazz_id in ("
+                     close=")"
+                     separator=",">
+                #{element}
+            </foreach>
+        </where>
+    </delete>
+
+
+</mapper>

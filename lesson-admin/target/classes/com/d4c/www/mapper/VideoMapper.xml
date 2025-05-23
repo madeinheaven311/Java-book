@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.d4c.www.mapper.VideoMapper">
+
+    <!--重用SQL片段: Video表全查片段-->
+    <sql id="list">
+        select
+        v.video_id, v.video_title, v.author, v.video_info, v.summary_image,
+        v.cover_image, v.price, v.star, v.video_deleted, v.create_time, v.modify_time
+        from lesson.video v
+    </sql>
+
+    <!--添加Video记录-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="videoId">
+        insert into lesson.video (
+        video_title, author, video_info, summary_image, cover_image, price,
+        star, video_deleted, create_time, modify_time )
+        values (
+        #{videoTitle}, #{author}, #{videoInfo}, #{summaryImage}, #{coverImage},
+        #{price}, #{star}, #{videoDeleted}, #{createTime}, #{modifyTime})
+    </insert>
+
+    <!--按条件查询Video记录-->
+    <select id="select" resultType="Video">
+        <include refid="list"/>
+        <where>
+            <if test="videoId != null">and v.video_id = #{videoId}</if>
+            <if test="videoTitle != null">and v.video_title = #{videoTitle}</if>
+            <if test="author != null">and v.author = #{author}</if>
+            <if test="videoInfo != null">and v.video_info = #{videoInfo}</if>
+            <if test="summaryImage != null">and v.summary_image = #{summaryImage}</if>
+            <if test="coverImage != null">and v.cover_image = #{coverImage}</if>
+            <if test="price != null">and v.price = #{price}</if>
+            <if test="star != null">and v.star = #{star}</if>
+            <if test="videoDeleted != null">and v.video_deleted = #{videoDeleted}</if>
+            <if test="createTime != null">and v.create_time = #{createTime}</if>
+            <if test="modifyTime != null">and v.modify_time = #{modifyTime}</if>
+        </where>
+    </select>
+
+    <!--按条件修改Video记录-->
+    <update id="update">
+        update lesson.video
+        <set>
+            <if test="param1.videoId != null">video_id = #{param1.videoId},</if>
+            <if test="param1.videoTitle != null">video_title = #{param1.videoTitle},</if>
+            <if test="param1.author != null">author = #{param1.author},</if>
+            <if test="param1.videoInfo != null">video_info = #{param1.videoInfo},</if>
+            <if test="param1.summaryImage != null">summary_image = #{param1.summaryImage},</if>
+            <if test="param1.coverImage != null">cover_image = #{param1.coverImage},</if>
+            <if test="param1.price != null">price = #{param1.price},</if>
+            <if test="param1.star != null">star = #{param1.star},</if>
+            <if test="param1.videoDeleted != null">video_deleted = #{param1.videoDeleted},</if>
+            <if test="param1.createTime != null">create_time = #{param1.createTime},</if>
+            <if test="param1.modifyTime != null">modify_time = #{param1.modifyTime},</if>
+        </set>
+        <where>
+            <choose>
+                <when test="param2.videoId != null">and video_id = #{param2.videoId}</when>
+                <when test="param2.videoTitle != null">and video_title = #{param2.videoTitle}</when>
+                <when test="param2.author != null">and author = #{param2.author}</when>
+                <when test="param2.videoInfo != null">and video_info = #{param2.videoInfo}</when>
+                <when test="param2.summaryImage != null">and summary_image= #{param2.summaryImage}</when>
+                <when test="param2.coverImage != null">and cover_image = #{param2.coverImage}</when>
+                <when test="param2.price != null">and price = #{param2.price}</when>
+                <when test="param2.star != null">and star = #{param2.star}</when>
+                <when test="param2.videoDeleted != null">and video_deleted= #{param2.videoDeleted}</when>
+                <when test="param2.createTime != null">and create_time = #{param2.createTime}</when>
+                <when test="param2.modifyTime != null">and modify_time = #{param2.modifyTime}</when>
+                <otherwise>or 1 = 2</otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--按条件删除Video记录-->
+    <delete id="delete">
+        delete from lesson.video
+        <where>
+            <choose>
+                <when test="videoId != null">and video_id = #{videoId}</when>
+                <when test="videoTitle != null">and video_title = #{videoTitle}</when>
+                <when test="author != null">and author = #{author}</when>
+                <when test="videoInfo != null">and video_info = #{videoInfo}</when>
+                <when test="summaryImage != null">and summary_image = #{summaryImage}</when>
+                <when test="coverImage != null">and cover_image = #{coverImage}</when>
+                <when test="price != null">and price = #{price}</when>
+                <when test="star != null">and star = #{star}</when>
+                <when test="videoDeleted != null">and video_deleted = #{videoDeleted}</when>
+                <when test="createTime != null">and create_time = #{createTime}</when>
+                <when test="modifyTime != null">and modify_time = #{modifyTime}</when>
+                <otherwise>or 1 = 2</otherwise>
+            </choose>
+        </where>
+    </delete>
+
+    <!--按Video主键数组批量删除多条Video记录-->
+    <delete id="deleteByVideoIds">
+        delete from lesson.video where video_id in
+        <foreach collection="array" item="videoId" open="(" close=")" separator=",">
+            ${videoId}
+        </foreach>
+    </delete>
+
+    <!--按Video主键查询Video记录（分步专用）-->
+    <select id="selectByVideoId" resultType="Video">
+        <include refid="list"/>
+        where v.video_id = #{param1} and v.video_deleted = 0
+    </select>
+
+    <!--视频评分分析-->
+    <select id="starCount" resultType="map">
+        select star name, count(*) as value
+        from lesson.video
+        group by star;
+    </select>
+
+</mapper>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.d4c.www.mapper.StudentMapper">
+
+    <select id="select" resultType="Student">
+        select s.student_id, s.real_name, s.gender, s.phone, s.clazz_id, s.create_time, s.modify_time,
+        from mybatis.student s
+        <where>
+            <if test = "StudentId != null">and s.student_id = #{StudentId}</if>
+            <if test = "RealName != null">and s.real_name = #{RealName}</if>
+            <if test = "Gender != null">and s.gender = #{Gender}</if>
+            <if test = "Phone != null">and s.phone = #{Phone}</if>
+            <if test = "ClazzId != null">and s.clazz_id = #{ClazzId}</if>
+            <if test = "CreateTime != null">and s.create_time = #{CreateTime}</if>
+            <if test = "ModifyTime != null">and s.modify_time = #{ModifyTime}</if>
+        </where>
+
+    </select>
+
+
+    <!--多表联合查询-->
+    <resultMap id="selectPlusMap" type="Student">
+        <id property="studentId" column="student_id"/>
+        <result property="realName" column="real_name"/>
+        <result property="gender" column="gender"/>
+        <result property="phone" column="phone"/>
+        <result property="clazzId" column="clazz_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="modifyTime" column="modify_time"/>
+        <association property="clazz" column="clazz_id" javaType="Clazz" jdbcType="INTEGER">
+            <id property="clazzId" column="clazz_id"/>
+            <result property="clazzName" column="clazz_name"/>
+            <result property="createTime" column="create_time"/>
+            <result property="modifyTime" column="modify_time"/>
+        </association>
+    </resultMap>
+
+    <select id="selectPlus" resultMap="selectPlusMap">
+        select s.student_id, s.real_name, s.gender, s.phone, s.clazz_id, s.create_time, s.modify_time,
+        c.clazz_id, c.clazz_name, c.create_time, c.modify_time
+        from mybatis.student s
+         left join mybatis.clazz c on s.clazz_id = c.clazz_id
+        <where>
+            <if test = "studentId != null">and s.student_id = #{studentId}</if>
+            <if test = "realName != null">and s.real_name = #{realName}</if>
+            <if test = "gender != null">and s.gender = #{gender}</if>
+            <if test = "phone != null">and s.phone = #{phone}</if>
+            <if test = "clazzId != null">and s.clazz_id = #{clazzId}</if>
+            <if test = "createTime != null">and s.create_time = #{createTime}</if>
+            <if test = "modifyTime != null">and s.modify_time = #{modifyTime}</if>
+        </where>
+
+    </select>
+
+<!--多表分布查询-->
+    <resultMap id="selectByStepMap" type="Student">
+        <id property="studentId" column="student_id"/>
+        <association property="clazz" column="clazz_id" javaType="Clazz" jdbcType="INTEGER"
+                        select="com.d4c.www.mapper.ClazzMapper.selectByClazzId"/>
+    </resultMap>
+
+    <select id="selectByStep" resultMap="selectByStepMap">
+        select s.student_id, s.real_name, s.gender, s.phone, s.clazz_id, s.create_time, s.modify_time,
+        from mybatis.student s
+        <where>
+            <if test = "studentId != null">and s.student_id = #{studentId}</if>
+            <if test = "realName != null">and s.real_name = #{realName}</if>
+            <if test = "gender != null">and s.gender = #{gender}</if>
+            <if test = "phone != null">and s.phone = #{phone}</if>
+            <if test = "clazzId != null">and s.clazz_id = #{clazzId}</if>
+            <if test = "createTime != null">and s.create_time = #{createTime}</if>
+            <if test = "modifyTime != null">and s.modify_time = #{modifyTime}</if>
+        </where>
+
+    </select>
+
+<!--用于分步查询，接收clazz中的查询传来的clazzId做主键查询,clazz->student -->
+    <select id="select" resultType="Student">
+        select s.student_id, s.real_name, s.gender, s.phone, s.clazz_id, s.create_time, s.modify_time,
+        from mybatis.student s
+        where
+        s.clazz_id = {#clazzId}
+
+    </select>
+
+
+
+
+    <!--开启主键回注功能并配置注回哪一个字段-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="StudentId">
+        insert into mybatis.student
+        (real_name,gender,phone,clazz_id,create_time,modify_time)
+        values
+        (#{realName},#{gender},#{phone},#{clazzId},#{createTime},#{modifyTime})
+    </insert>
+
+
+    <update id="update" >
+        update mybatis.student s
+    <!--<set>为mybatis提供自动SET方法，在<set>内的sql，mybatis会自动生成SET关键字，<set>内无语句时，则不会生成SET关键字，
+        且<set>会自动删除并接sql语句的最后一个逗号，
+        配合<if>使用时，可形成动态sql语句，在未满足<if>内的条件时，不必手动满足<if>内的sql，mybatis会自动SET-->
+        <set>
+            <if test = "param1.studentId != null">s.student_id = #{param1.studentId},</if>
+            <if test = "param1.realName != null">s.real_name = #{param1.realName},</if>
+            <if test = "param1.gender != null">s.gender = #{param1.gender},</if>
+            <if test = "param1.phone != null">s.phone = #{param1.phone},</if>
+            <if test = "param1.clazzId != null">s.clazz_id = #{param1.clazzId},</if>
+            <if test = "param1.createTime != null">s.create_time = #{param1.createTime},</if>
+            <if test = "param1.modifyTime != null">s.modify_time = #{param1.modifyTime},</if>
+        </set>
+        <where>
+            <choose>
+                <when test = "param2.studentId != null">and s.student_id = #{param2.studentId}</when>
+                <when test = "param2.realName != null">and s.real_name = #{param2.realName}</when>
+                <when test = "param2.gender != null">and s.gender = #{param2.gender}</when>
+                <when test = "param2.phone != null">and s.phone = #{param2.phone}</when>
+                <when test = "param2.clazzId != null">and s.clazz_id = #{param2.clazzId}</when>
+                <when test = "param2.createTime != null">and s.create_time = #{param2.createTime}</when>
+                <when test = "param2.modifyTime != null">and s.modify_time = #{param2.modifyTime}</when>
+<!--防止where语句中一个变量都不传，sql语句出现错误-->
+                <otherwise> and 1 = 2 </otherwise>
+            </choose>
+        </where>
+
+    </update>
+
+    <delete id="delete">
+        delete
+        from mybatis.student s
+        <where>
+            <if test = "studentId != null">and s.student_id = #{studentId}</if>
+            <if test = "realName != null">and s.real_name = #{realName}</if>
+            <if test = "gender != null">and s.gender = #{gender}</if>
+            <if test = "phone != null">and s.phone = #{phone}</if>
+            <if test = "clazzId != null">and s.clazz_id = #{clazzId}</if>
+            <if test = "createTime != null">and s.create_time = #{createTime}</if>
+            <if test = "modifyTime != null">and s.modify_time = #{modifyTime}</if>
+        </where>
+    </delete>
+
+    <delete id="BatchDelete">
+        delete
+        from mybatis.student
+        <where>
+            <foreach collection="list"
+                     item="element"
+                     open=" student_id in ("
+                     close=")"
+                     separator=",">
+                #{element}
+            </foreach>
+        </where>
+    </delete>
+
+
+</mapper>

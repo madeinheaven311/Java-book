@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.d4c.www.mapper.UserMapper">
+
+
+    <!--重用SQL片段: User表全查片段-->
+    <sql id="list">
+        select
+        u.user_id, u.username, u.password, u.real_name, u.nick_name, u.gender, u.age,
+        u.id_card, u.avatar_url, u.phone, u.user_info, u.user_deleted,
+        u.create_time, u.modify_time
+        from
+        lesson.user u
+    </sql>
+
+    <!--添加User记录-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="userId">
+        insert into lesson.user (
+        username, password, real_name, nick_name, gender, age, id_card, avatar_url,
+        phone, user_info, user_deleted, create_time, modify_time )
+        values (
+        #{username}, #{password}, #{realName}, #{nickName}, #{gender}, #{age},
+        #{idCard}, #{avatarUrl}, #{phone}, #{userInfo}, #{userDeleted},
+        #{createTime}, #{modifyTime} )
+    </insert>
+
+    <!--按条件查询User记录-->
+    <select id="select" resultType="User">
+        <include refid="list"/>
+        <where>
+            <if test="userId != null">and user_id = #{userId} </if>
+            <if test="username != null">and username = #{username} </if>
+            <if test="password != null">and password = #{password} </if>
+            <if test="realName != null">and real_name = #{realName} </if>
+            <if test="nickName != null">and nick_name = #{nickName} </if>
+            <if test="gender != null">and gender = #{gender} </if>
+            <if test="age != null">and age = #{age} </if>
+            <if test="idCard != null">and id_card = #{idCard} </if>
+            <if test="avatarUrl != null">and avatar_url = #{avatarUrl} </if>
+            <if test="phone != null">and phone = #{phone} </if>
+            <if test="userInfo != null">and user_info = #{userInfo} </if>
+            <if test="userDeleted != null">and user_deleted = #{userDeleted} </if>
+            <if test="createTime != null">and create_time = #{createTime} </if>
+            <if test="modifyTime != null">and modify_time = #{modifyTime} </if>
+        </where>
+    </select>
+
+    <!--按条件修改User记录-->
+    <update id="update">
+        update lesson.user
+        <set>
+            <if test="param1.username != null">username = #{param1.username},</if>
+            <if test="param1.password != null">password = #{param1.password},</if>
+            <if test="param1.realName != null">real_name = #{param1.realName},</if>
+            <if test="param1.nickName != null">nick_name = #{param1.nickName},</if>
+            <if test="param1.gender != null">gender = #{param1.gender},</if>
+            <if test="param1.age != null">age = #{param1.age},</if>
+            <if test="param1.idCard != null">id_card = #{param1.idCard},</if>
+            <if test="param1.avatarUrl != null">avatar_url = #{param1.avatarUrl},</if>
+            <if test="param1.phone != null">phone = #{param1.phone},</if>
+            <if test="param1.userInfo != null">user_info = #{param1.userInfo},</if>
+            <if test="param1.userDeleted != null">user_deleted = #{param1.userDeleted},</if>
+            <if test="param1.createTime != null">create_time = #{param1.createTime},</if>
+            <if test="param1.modifyTime != null">modify_time = #{param1.modifyTime},</if>
+        </set>
+        <where>
+            <if test="param2.userId != null">and user_id = #{param2.userId} </if>
+            <if test="param2.username != null">and username = #{param2.username} </if>
+            <if test="param2.password != null">and password = #{param2.password} </if>
+            <if test="param2.realName != null">and real_name = #{param2.realName} </if>
+            <if test="param2.nickName != null">and nick_name = #{param2.nickName} </if>
+            <if test="param2.gender != null">and gender = #{param2.gender} </if>
+            <if test="param2.age != null">and age = #{param2.age} </if>
+            <if test="param2.idCard != null">and id_card = #{param2.idCard} </if>
+            <if test="param2.avatarUrl != null">and avatar_url = #{param2.avatarUrl} </if>
+            <if test="param2.phone != null">and phone = #{param2.phone} </if>
+            <if test="param2.userInfo != null">and user_info = #{param2.userInfo} </if>
+            <if test="param2.userDeleted != null">and user_deleted = #{param2.userDeleted} </if>
+            <if test="param2.createTime != null">and create_time = #{param2.createTime} </if>
+            <if test="param2.modifyTime != null">and modify_time = #{param2.modifyTime} </if>
+            or 1 = 2
+        </where>
+    </update>
+
+    <!--按条件删除User记录-->
+    <delete id="delete">
+        delete from lesson.user
+        <where>
+            <if test="userId != null">and user_id = #{userId} </if>
+            <if test="username != null">and username = #{username} </if>
+            <if test="password != null">and password = #{password} </if>
+            <if test="realName != null">and real_name = #{realName} </if>
+            <if test="nickName != null">and nick_name = #{nickName} </if>
+            <if test="gender != null">and gender = #{gender} </if>
+            <if test="age != null">and age = #{age} </if>
+            <if test="idCard != null">and id_card = #{idCard} </if>
+            <if test="avatarUrl != null">and avatar_url = #{avatarUrl} </if>
+            <if test="phone != null">and phone = #{phone} </if>
+            <if test="userInfo != null">and user_info = #{userInfo} </if>
+            <if test="userDeleted != null">and user_deleted = #{userDeleted} </if>
+            <if test="createTime != null">and create_time = #{createTime} </if>
+            <if test="modifyTime != null">and modify_time = #{modifyTime} </if>
+            or 1 = 2
+        </where>
+    </delete>
+
+    <!--按User主键数组批量删除多条User记录-->
+    <delete id="deleteByUserIds">
+        delete from lesson.user where user_id in
+        <foreach collection="array" item="userId" open="(" close=")" separator=",">
+            ${userId}
+        </foreach>
+    </delete>
+</mapper>

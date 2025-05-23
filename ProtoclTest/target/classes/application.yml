@@ -1,0 +1,7 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: Sse
+  resources:
+    static-locations: classpath:/resources/,classpath:/static/

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSE Client</title>
+</head>
+<body>
+    <h1>Receive: <span id="sse"></span></h1>
+    <script>
+        const numberElement = document.getElementById("sse");
+        const source = new EventSource('http://localhost:8080/webflux');
+
+        source.onmessage = (event) => {
+            numberElement.innerText = event.data;
+        };
+
+        source.onerror = (error) => {
+            console.error("SSE error:", error);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+::-webkit-scrollbar {
+    display: none; /*隐藏滚动条*/
+}
+
+.jumbotron {
+    background: rgb(192, 214, 245);   /*背景色*/
+    width: 1000px;   /*宽度*/
+    margin: 20px auto;   /*上下外边距 左右居中*/
+}
+
+.leftScreen, .rightScreen {
+    height: 400px;   /*高度*/
+    text-align: left;   /*内容居左*/
+    overflow-y: scroll;   /*垂直滚动条*/
+}
+
+.media img {
+    height: 50px;  /*高度*/
+    width: 50px;  /*宽度*/
+}

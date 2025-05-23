@@ -1,0 +1,12 @@
+server:
+  port: 8090 # 端口号
+spring:
+  application:
+    name: sleuth-product # 项目名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.216.4:8848 # nacos地址
+logging:
+  level:
+    com.d4c.www.feign: debug # 配置指定包的日志等级

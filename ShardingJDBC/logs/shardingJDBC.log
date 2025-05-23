@@ -1,0 +1,725 @@
+2025-02-20 21:30:48.311  INFO 1568 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 1568 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 21:30:48.322  INFO 1568 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 21:30:49.043  INFO 1568 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:30:49.061  INFO 1568 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:30:49.069  INFO 1568 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:30:49.076  INFO 1568 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:30:49.084  INFO 1568 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:30:49.088  INFO 1568 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:30:49.355  INFO 1568 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$5dcb6041] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:30:49.675  INFO 1568 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 21:30:51.213  INFO 1568 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 21:30:51.302  INFO 1568 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 21:30:51.303  INFO 1568 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 21:30:51.327  INFO 1568 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 21:30:51.375  INFO 1568 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 71 milliseconds.
+2025-02-20 21:30:51.739  INFO 1568 --- [main] servcie.OrderServiceTest                     : Started OrderDaoTest in 3.806 seconds (JVM running for 4.655)
+2025-02-20 21:30:52.436  INFO 1568 --- [main] ShardingSphere-SQL                       : Logic SQL: insert into t_order(price,user_id,status)values(?,?,?)
+2025-02-20 21:30:52.438  INFO 1568 --- [main] ShardingSphere-SQL                       : SQLStatement: InsertStatementContext(super=CommonSQLStatementContext(sqlStatement=org.apache.shardingsphere.sql.parser.sql.statement.dml.InsertStatement@350342e0, tablesContext=org.apache.shardingsphere.sql.parser.binder.segment.table.TablesContext@5d297d4d), tablesContext=org.apache.shardingsphere.sql.parser.binder.segment.table.TablesContext@5d297d4d, columnNames=[price, user_id, status], insertValueContexts=[InsertValueContext(parametersCount=3, valueExpressions=[ParameterMarkerExpressionSegment(startIndex=48, stopIndex=48, parameterMarkerIndex=0), ParameterMarkerExpressionSegment(startIndex=50, stopIndex=50, parameterMarkerIndex=1), ParameterMarkerExpressionSegment(startIndex=52, stopIndex=52, parameterMarkerIndex=2)], parameters=[5, 1, WAIT_PAY])], generatedKeyContext=Optional.empty)
+2025-02-20 21:30:52.438  INFO 1568 --- [main] ShardingSphere-SQL                       : Actual SQL: m2 ::: insert into t_order_1(price,user_id,status)values(?, ?, ?) ::: [5, 1, WAIT_PAY]
+2025-02-20 21:30:52.438  INFO 1568 --- [main] ShardingSphere-SQL                       : Actual SQL: m2 ::: insert into t_order_2(price,user_id,status)values(?, ?, ?) ::: [5, 1, WAIT_PAY]
+2025-02-20 21:30:52.551  INFO 1568 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 21:30:52.554  INFO 1568 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 21:44:46.798  INFO 30144 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 30144 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 21:44:46.800  INFO 30144 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 21:44:47.416  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:47.428  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:47.433  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:47.439  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:47.446  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:47.451  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:47.707  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$641b6e56] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:48.005  INFO 30144 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 21:44:49.480  INFO 30144 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 21:44:49.563  INFO 30144 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 21:44:49.565  INFO 30144 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 21:44:49.585  INFO 30144 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 21:44:49.621  INFO 30144 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 56 milliseconds.
+2025-02-20 21:44:49.642  WARN 30144 --- [main] s.c.a.AnnotationConfigApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderImpl': Unsatisfied dependency expressed through field 'orderMapper'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.d4c.mapper.OrderMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2025-02-20 21:44:49.646  INFO 30144 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 21:44:49.647  INFO 30144 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 21:44:49.652  INFO 30144 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-02-20 21:44:49.668 ERROR 30144 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field orderMapper in com.d4c.service.impl.OrderImpl required a bean of type 'com.d4c.mapper.OrderMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.d4c.mapper.OrderMapper' in your configuration.
+
+2025-02-20 21:44:49.693  INFO 30144 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 30144 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 21:44:49.693  INFO 30144 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 21:44:49.795  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:49.802  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:49.805  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:49.808  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:49.811  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:49.815  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:49.819  INFO 30144 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$641b6e56] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:44:49.846  INFO 30144 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-3} inited
+2025-02-20 21:44:49.868  INFO 30144 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-4} inited
+2025-02-20 21:44:49.889  INFO 30144 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 21:44:49.890  INFO 30144 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 21:44:49.895  INFO 30144 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 21:44:49.916  INFO 30144 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 26 milliseconds.
+2025-02-20 21:44:49.923  WARN 30144 --- [main] s.c.a.AnnotationConfigApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderImpl': Unsatisfied dependency expressed through field 'orderMapper'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.d4c.mapper.OrderMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2025-02-20 21:44:49.924  INFO 30144 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-3} closed
+2025-02-20 21:44:49.926  INFO 30144 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-4} closed
+2025-02-20 21:44:49.930  INFO 30144 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-02-20 21:44:49.931 ERROR 30144 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field orderMapper in com.d4c.service.impl.OrderImpl required a bean of type 'com.d4c.mapper.OrderMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.d4c.mapper.OrderMapper' in your configuration.
+
+2025-02-20 21:44:49.937 ERROR 30144 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@72d6b3ba] to prepare test instance [servcie.OrderServiceTest@4e07b95f]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:123) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:118) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener.prepareTestInstance(SpringBootDependencyInjectionTestExecutionListener.java:43) ~[spring-boot-test-autoconfigure-2.3.12.RELEASE.jar:2.3.12.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) ~[junit-4.13.2.jar:4.13.2]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69) ~[junit-rt.jar:na]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) ~[junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) ~[idea_rt.jar:na]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) ~[junit-rt.jar:na]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232) ~[junit-rt.jar:na]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55) ~[junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'orderImpl': Unsatisfied dependency expressed through field 'orderMapper'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.d4c.mapper.OrderMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:660) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1425) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879) ~[spring-context-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551) ~[spring-context-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:755) ~[spring-boot-2.3.12.RELEASE.jar:2.3.12.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747) ~[spring-boot-2.3.12.RELEASE.jar:2.3.12.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:402) ~[spring-boot-2.3.12.RELEASE.jar:2.3.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-2.3.12.RELEASE.jar:2.3.12.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:120) ~[spring-boot-test-2.3.12.RELEASE.jar:2.3.12.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	... 28 common frames omitted
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.d4c.mapper.OrderMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1717) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1273) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:657) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	... 48 common frames omitted
+
+2025-02-20 21:45:36.282  INFO 28828 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 28828 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 21:45:36.283  INFO 28828 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 21:45:36.856  INFO 28828 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:45:36.871  INFO 28828 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:45:36.876  INFO 28828 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:45:36.882  INFO 28828 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:45:36.888  INFO 28828 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:45:36.893  INFO 28828 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:45:37.102  INFO 28828 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$f4c16804] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:45:37.387  INFO 28828 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 21:45:38.818  INFO 28828 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 21:45:38.900  INFO 28828 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 21:45:38.902  INFO 28828 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 21:45:38.922  INFO 28828 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 21:45:38.953  INFO 28828 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 51 milliseconds.
+2025-02-20 21:45:39.221  INFO 28828 --- [main] servcie.OrderServiceTest                     : Started OrderDaoTest in 3.205 seconds (JVM running for 3.93)
+2025-02-20 21:45:39.561  INFO 28828 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 21:45:39.562  INFO 28828 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 21:47:19.582  INFO 27096 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 27096 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 21:47:19.583  INFO 27096 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 21:47:20.140  INFO 27096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:47:20.157  INFO 27096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:47:20.162  INFO 27096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:47:20.169  INFO 27096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:47:20.177  INFO 27096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:47:20.181  INFO 27096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:47:20.398  INFO 27096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$91de6a4e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:47:20.677  INFO 27096 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 21:47:22.149  INFO 27096 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 21:47:22.234  INFO 27096 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 21:47:22.235  INFO 27096 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 21:47:22.254  INFO 27096 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 21:47:22.284  INFO 27096 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 49 milliseconds.
+2025-02-20 21:47:22.596  INFO 27096 --- [main] servcie.OrderServiceTest                     : Started OrderDaoTest in 3.29 seconds (JVM running for 4.027)
+2025-02-20 21:47:23.161  INFO 27096 --- [main] ShardingSphere-SQL                       : Logic SQL: insert into t_order(price,user_id,status)values(?,?,?)
+2025-02-20 21:47:23.162  INFO 27096 --- [main] ShardingSphere-SQL                       : SQLStatement: InsertStatementContext(super=CommonSQLStatementContext(sqlStatement=org.apache.shardingsphere.sql.parser.sql.statement.dml.InsertStatement@74431832, tablesContext=org.apache.shardingsphere.sql.parser.binder.segment.table.TablesContext@6fa2a006), tablesContext=org.apache.shardingsphere.sql.parser.binder.segment.table.TablesContext@6fa2a006, columnNames=[price, user_id, status], insertValueContexts=[InsertValueContext(parametersCount=3, valueExpressions=[ParameterMarkerExpressionSegment(startIndex=48, stopIndex=48, parameterMarkerIndex=0), ParameterMarkerExpressionSegment(startIndex=50, stopIndex=50, parameterMarkerIndex=1), ParameterMarkerExpressionSegment(startIndex=52, stopIndex=52, parameterMarkerIndex=2)], parameters=[5, 1, WAIT_PAY])], generatedKeyContext=Optional.empty)
+2025-02-20 21:47:23.162  INFO 27096 --- [main] ShardingSphere-SQL                       : Actual SQL: m2 ::: insert into t_order_1(price,user_id,status)values(?, ?, ?) ::: [5, 1, WAIT_PAY]
+2025-02-20 21:47:23.162  INFO 27096 --- [main] ShardingSphere-SQL                       : Actual SQL: m2 ::: insert into t_order_2(price,user_id,status)values(?, ?, ?) ::: [5, 1, WAIT_PAY]
+2025-02-20 21:47:23.261  INFO 27096 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 21:47:23.263  INFO 27096 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 21:49:21.553  INFO 27816 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 27816 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 21:49:21.554  INFO 27816 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 21:49:22.129  INFO 27816 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:49:22.150  INFO 27816 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:49:22.157  INFO 27816 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:49:22.164  INFO 27816 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:49:22.171  INFO 27816 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:49:22.176  INFO 27816 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:49:22.434  INFO 27816 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$3be45e77] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:49:22.783  INFO 27816 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 21:49:24.276  INFO 27816 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 21:49:24.361  INFO 27816 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 21:49:24.363  INFO 27816 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 21:49:24.382  INFO 27816 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 21:49:24.412  INFO 27816 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 48 milliseconds.
+2025-02-20 21:49:24.649  INFO 27816 --- [main] servcie.OrderServiceTest                     : Started OrderDaoTest in 3.368 seconds (JVM running for 4.12)
+2025-02-20 21:49:24.901  INFO 27816 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 21:49:24.903  INFO 27816 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 21:54:31.679  INFO 16836 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 16836 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 21:54:31.680  INFO 16836 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 21:54:32.190  INFO 16836 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:54:32.206  INFO 16836 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:54:32.210  INFO 16836 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:54:32.216  INFO 16836 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:54:32.221  INFO 16836 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:54:32.226  INFO 16836 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:54:32.439  INFO 16836 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$ae5bf18f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:54:32.705  INFO 16836 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 21:54:34.095  INFO 16836 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 21:54:34.168  INFO 16836 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 21:54:34.169  INFO 16836 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 21:54:34.188  INFO 16836 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 21:54:34.222  INFO 16836 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 51 milliseconds.
+2025-02-20 21:54:34.451  INFO 16836 --- [main] servcie.OrderServiceTest                     : Started OrderDaoTest in 3.023 seconds (JVM running for 3.697)
+2025-02-20 21:54:34.685  INFO 16836 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 21:54:34.687  INFO 16836 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 21:55:12.492  INFO 31784 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 31784 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 21:55:12.493  INFO 31784 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 21:55:13.019  INFO 31784 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:55:13.035  INFO 31784 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:55:13.040  INFO 31784 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:55:13.047  INFO 31784 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:55:13.052  INFO 31784 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:55:13.056  INFO 31784 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:55:13.255  INFO 31784 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$56b0a0ba] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:55:13.513  INFO 31784 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 21:55:14.856  INFO 31784 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 21:55:14.930  INFO 31784 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 21:55:14.931  INFO 31784 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 21:55:14.949  INFO 31784 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 21:55:14.981  INFO 31784 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 49 milliseconds.
+2025-02-20 21:55:15.222  INFO 31784 --- [main] servcie.OrderServiceTest                     : Started OrderDaoTest in 2.996 seconds (JVM running for 3.666)
+2025-02-20 21:55:15.459  INFO 31784 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 21:55:15.461  INFO 31784 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 21:56:39.202  INFO 19096 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 19096 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 21:56:39.204  INFO 19096 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 21:56:39.707  INFO 19096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:56:39.720  INFO 19096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:56:39.725  INFO 19096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:56:39.731  INFO 19096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:56:39.736  INFO 19096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:56:39.739  INFO 19096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:56:39.941  INFO 19096 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$56b0a0ba] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:56:40.216  INFO 19096 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 21:56:41.579  INFO 19096 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 21:56:41.651  INFO 19096 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 21:56:41.652  INFO 19096 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 21:56:41.670  INFO 19096 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 21:56:41.698  INFO 19096 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 46 milliseconds.
+2025-02-20 21:56:41.935  INFO 19096 --- [main] servcie.OrderServiceTest                     : Started OrderDaoTest in 2.981 seconds (JVM running for 3.616)
+2025-02-20 21:56:42.176  INFO 19096 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 21:56:42.178  INFO 19096 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 21:59:44.777  INFO 32204 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 32204 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 21:59:44.777  INFO 32204 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 21:59:45.264  INFO 32204 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:59:45.287  INFO 32204 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:59:45.293  INFO 32204 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:59:45.300  INFO 32204 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:59:45.306  INFO 32204 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:59:45.310  INFO 32204 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:59:45.513  INFO 32204 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$5cf9e29a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 21:59:45.789  INFO 32204 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 21:59:47.137  INFO 32204 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 21:59:47.208  INFO 32204 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 21:59:47.210  INFO 32204 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 21:59:47.226  INFO 32204 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 21:59:47.253  INFO 32204 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 43 milliseconds.
+2025-02-20 21:59:47.489  INFO 32204 --- [main] servcie.OrderServiceTest                     : Started OrderDaoTest in 2.965 seconds (JVM running for 3.623)
+2025-02-20 21:59:47.760  INFO 32204 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 21:59:47.762  INFO 32204 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 22:03:24.796  INFO 28772 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 28772 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 22:03:24.797  INFO 28772 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 22:03:25.317  INFO 28772 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:25.330  INFO 28772 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:25.335  INFO 28772 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:25.341  INFO 28772 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:25.347  INFO 28772 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:25.350  INFO 28772 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:25.570  INFO 28772 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$513d4e81] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:25.861  INFO 28772 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 22:03:27.215  INFO 28772 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 22:03:27.291  INFO 28772 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 22:03:27.292  INFO 28772 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 22:03:27.311  INFO 28772 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 22:03:27.342  INFO 28772 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 49 milliseconds.
+2025-02-20 22:03:27.583  INFO 28772 --- [main] servcie.OrderServiceTest                     : Started OrderDaoTest in 3.043 seconds (JVM running for 3.694)
+2025-02-20 22:03:27.851  INFO 28772 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 22:03:27.855  INFO 28772 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 22:03:39.885  INFO 7820 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 7820 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 22:03:39.886  INFO 7820 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 22:03:45.093  INFO 7820 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:45.105  INFO 7820 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:45.111  INFO 7820 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:45.117  INFO 7820 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:45.122  INFO 7820 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:45.126  INFO 7820 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:45.322  INFO 7820 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$53d28df] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:45.551  INFO 7820 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 22:03:54.285  INFO 23752 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 23752 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 22:03:54.286  INFO 23752 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 22:03:54.791  INFO 23752 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:54.807  INFO 23752 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:54.813  INFO 23752 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:54.817  INFO 23752 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:54.821  INFO 23752 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:54.825  INFO 23752 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:55.021  INFO 23752 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$91de6a4e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:03:55.276  INFO 23752 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 22:03:56.631  INFO 23752 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 22:03:56.703  INFO 23752 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 22:03:56.704  INFO 23752 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 22:03:56.721  INFO 23752 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 22:03:56.750  INFO 23752 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 46 milliseconds.
+2025-02-20 22:03:56.973  INFO 23752 --- [main] servcie.OrderServiceTest                     : Started OrderDaoTest in 2.935 seconds (JVM running for 3.595)
+2025-02-20 22:03:57.224  INFO 23752 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 22:03:57.225  INFO 23752 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 22:07:13.401  INFO 10996 --- [main] servcie.OrderServiceTest                     : Starting OrderDaoTest on SHW with PID 10996 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 22:07:13.401  INFO 10996 --- [main] servcie.OrderServiceTest                     : The following profiles are active: db
+2025-02-20 22:07:13.911  INFO 10996 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:07:13.928  INFO 10996 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:07:13.934  INFO 10996 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:07:13.941  INFO 10996 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:07:13.946  INFO 10996 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:07:13.950  INFO 10996 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:07:14.149  INFO 10996 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$513d4e81] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:07:14.450  INFO 10996 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 22:07:15.862  INFO 10996 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 22:07:15.936  INFO 10996 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 22:07:15.937  INFO 10996 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 22:07:15.956  INFO 10996 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 22:07:15.985  INFO 10996 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 47 milliseconds.
+2025-02-20 22:07:16.226  INFO 10996 --- [main] servcie.OrderServiceTest                     : Started OrderDaoTest in 3.087 seconds (JVM running for 3.74)
+2025-02-20 22:07:16.461  INFO 10996 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 22:07:16.464  INFO 10996 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 22:08:08.064  INFO 27732 --- [main] servcie.OrderServiceTest                 : Starting OrderServiceTest on SHW with PID 27732 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 22:08:08.066  INFO 27732 --- [main] servcie.OrderServiceTest                 : The following profiles are active: db
+2025-02-20 22:08:08.603  INFO 27732 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:08:08.623  INFO 27732 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:08:08.628  INFO 27732 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:08:08.634  INFO 27732 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:08:08.642  INFO 27732 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:08:08.647  INFO 27732 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:08:08.895  INFO 27732 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$6ca05c44] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:08:09.206  INFO 27732 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 22:08:10.560  INFO 27732 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 22:08:10.635  INFO 27732 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 22:08:10.637  INFO 27732 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 22:08:10.655  INFO 27732 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 22:08:10.686  INFO 27732 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 49 milliseconds.
+2025-02-20 22:08:10.939  INFO 27732 --- [main] servcie.OrderServiceTest                 : Started OrderServiceTest in 3.144 seconds (JVM running for 3.792)
+2025-02-20 22:08:10.958 ERROR 27732 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@6f8e8894] to prepare test instance [servcie.OrderServiceTest@44a59da3]
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'servcie.OrderServiceTest': Unsatisfied dependency expressed through field 'orderDao'; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'com.d4c.service.OrderService' available: expected single matching bean but found 2: orderImpl,orderService
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:660) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1425) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:392) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:119) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener.prepareTestInstance(SpringBootDependencyInjectionTestExecutionListener.java:43) ~[spring-boot-test-autoconfigure-2.3.12.RELEASE.jar:2.3.12.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) ~[spring-test-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) ~[junit-4.13.2.jar:4.13.2]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69) ~[junit-rt.jar:na]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) ~[junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) ~[idea_rt.jar:na]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) ~[junit-rt.jar:na]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232) ~[junit-rt.jar:na]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55) ~[junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'com.d4c.service.OrderService' available: expected single matching bean but found 2: orderImpl,orderService
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveNotUnique(DependencyDescriptor.java:220) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1285) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:657) ~[spring-beans-5.2.15.RELEASE.jar:5.2.15.RELEASE]
+	... 32 common frames omitted
+
+2025-02-20 22:08:10.973  INFO 27732 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 22:08:10.975  INFO 27732 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 22:09:12.413  INFO 29116 --- [main] servcie.OrderServiceTest                 : Starting OrderServiceTest on SHW with PID 29116 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 22:09:12.413  INFO 29116 --- [main] servcie.OrderServiceTest                 : The following profiles are active: db
+2025-02-20 22:09:12.918  INFO 29116 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:09:12.931  INFO 29116 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:09:12.936  INFO 29116 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:09:12.941  INFO 29116 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:09:12.947  INFO 29116 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:09:12.950  INFO 29116 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:09:13.156  INFO 29116 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$c592900d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:09:13.462  INFO 29116 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 22:09:14.841  INFO 29116 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 22:09:14.913  INFO 29116 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 22:09:14.915  INFO 29116 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 22:09:14.931  INFO 29116 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 22:09:14.960  INFO 29116 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 45 milliseconds.
+2025-02-20 22:09:15.210  INFO 29116 --- [main] servcie.OrderServiceTest                 : Started OrderServiceTest in 3.062 seconds (JVM running for 3.708)
+2025-02-20 22:09:15.451  INFO 29116 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 22:09:15.453  INFO 29116 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2025-02-20 22:27:19.200  INFO 30764 --- [main] servcie.OrderServiceTest                 : Starting OrderServiceTest on SHW with PID 30764 (started by 54515 in D:\workSpace\Java0521\java-book\ShardingJDBC)
+2025-02-20 22:27:19.201  INFO 30764 --- [main] servcie.OrderServiceTest                 : The following profiles are active: db
+2025-02-20 22:27:19.746  INFO 30764 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:27:19.772  INFO 30764 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.sharding-org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:27:19.776  INFO 30764 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.masterslave-org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:27:19.782  INFO 30764 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.encrypt-org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:27:19.789  INFO 30764 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere.shadow-org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:27:19.794  INFO 30764 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.shardingsphere-org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:27:20.009  INFO 30764 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration' of type [org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration$$EnhancerBySpringCGLIB$$c713a27b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-02-20 22:27:20.254  INFO 30764 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2025-02-20 22:27:21.708  INFO 30764 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2025-02-20 22:27:21.795  INFO 30764 --- [main] o.a.s.core.log.ConfigurationLogger       : ShardingRuleConfiguration:
+tables:
+  t_order:
+    actualDataNodes: m$->{1..2}.t_order_$->{1..2}
+    databaseStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabasePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.DatabaseRangeAlgorithm
+        shardingColumn: user_id
+    logicTable: t_order
+    tableStrategy:
+      standard:
+        preciseAlgorithmClassName: com.d4c.config.dbAlgorithm.TablePreciseAlgorithm
+        rangeAlgorithmClassName: com.d4c.config.dbAlgorithm.TableRangeAlgorithm
+        shardingColumn: order_id
+
+2025-02-20 22:27:21.798  INFO 30764 --- [main] o.a.s.core.log.ConfigurationLogger       : Properties:
+sql.show: 'true'
+
+2025-02-20 22:27:21.818  INFO 30764 --- [main] ShardingSphere-metadata                  : Loading 1 logic tables' meta data.
+2025-02-20 22:27:21.859  INFO 30764 --- [main] ShardingSphere-metadata                  : Meta data load finished, cost 61 milliseconds.
+2025-02-20 22:27:22.086  INFO 30764 --- [main] servcie.OrderServiceTest                 : Started OrderServiceTest in 3.164 seconds (JVM running for 3.823)
+2025-02-20 22:27:22.459  INFO 30764 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2025-02-20 22:27:22.461  INFO 30764 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed

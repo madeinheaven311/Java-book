@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.d4c</groupId>
+        <artifactId>java-book</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>ProtoclTest</artifactId>
+
+    <!--该项目的全局变量-->
+    <properties>
+        <!--源码JDK版本-->
+        <maven.compiler.source>11</maven.compiler.source>
+        <!--字节码JDK版本-->
+        <maven.compiler.target>11</maven.compiler.target>
+        <!--源码字符集-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--字节码字符集-->
+        <project.build.targetEncoding>UTF-8</project.build.targetEncoding>
+    </properties>
+
+    <dependencies>
+        <!--spring-boot-starter-web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.3.12.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+            <version>3.4.16</version> <!-- 请根据实际情况选择合适的版本 -->
+        </dependency>
+
+    </dependencies>
+
+</project>

@@ -1,0 +1,15 @@
+server:
+  port: 8091 # 端口号
+spring:
+  application:
+    name: sleuth-order # 项目名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.216.4:8848 # nacos地址
+  zipkin:
+    base-url: http://192.168.216.4:9411 # Zipkin服务端地址
+    discovery-client-enabled: false # 不向Nacos注册此服务
+  sleuth:
+    sampler:
+      probability: 1.0 # 采样的百分比设置为100%采样

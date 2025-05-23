@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.d4c.www.mapper.OrderMapper">
+
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into lesson.oms_order
+        ('id', 'sn', 'total_amount', 'pay_amount', 'pay_type', 'info', 'state','fk_member_id', 'fk_coupons_id', 'username', 'created', 'updated')
+        values
+         (#{id}, #{sn}, #{totalAmount}, #{payAmount}, #{payType}, #{info}, #{state}, #{fkMemberId}, #{fkCouponsId}, #{username}, #{created}, #{updated})
+    </insert>
+
+    <delete id="delete">
+        delete from lesson.oms_order o
+        <where>
+            <if test="id != null">and o.id = #{id}</if>
+            <if test="sn != null">and o.sn = #{sn}</if>
+            <if test="totalAmount != null">and o.total_amount = #{totalAmount}</if>
+            <if test="payAmount != null">and o.pay_amount = #{payAmount}</if>
+            <if test="payType != null">and o.pay_type = #{payType}</if>
+            <if test="info != null">and o.info = #{info}</if>
+            <if test="state != null">and o.state = #{state}</if>
+            <if test="fkMemberId != null">and o.fk_member_id = #{fkMemberId}</if>
+            <if test="fkCouponsId != null">and o.fk_coupons_id = #{fkCouponsId}</if>
+            <if test="username != null">and o.username = #{username}</if>
+            <if test="created != null">and o.created = #{created}</if>
+            <if test="updated != null">and o.updated = #{updated}</if>
+            or 1=2
+        </where>
+    </delete>
+
+    <update id="update">
+        update lesson.oms_order o
+        <set>
+            <if test="param1.id != null">o.id = #{param1.id},</if>
+            <if test="param1.sn != null">o.sn = #{param1.sn}</if>
+            <if test="param1.totalAmount != null">o.total_amount = #{param1.totalAmount},</if>
+            <if test="param1.payAmount != null">o.pay_amount = #{param1.payAmount},</if>
+            <if test="param1.payType != null">o.pay_type = #{param1.payType},</if>
+            <if test="param1.info != null">o.info = #{param1.info},</if>
+            <if test="param1.state != null">o.state = #{param1.state},</if>
+            <if test="param1.fkMemberId != null">o.fk_member_id = #{param1.fkMemberId},</if>
+            <if test="param1.fkCouponsId != null">o.fk_coupons_id = #{param1.fkCouponsId},</if>
+            <if test="param1.username != null">o.username = #{param1.username},</if>
+            <if test="param1.created != null">o.created = #{param1.created},</if>
+            <if test="param1.updated != null">o.updated = #{param1.updated},</if>
+        </set>
+        <where>
+            <if test="param2.id != null">and o.id = #{param2.id}</if>
+            <if test="param2.sn != null">and o.sn = #{param2.sn}</if>
+            <if test="param2.totalAmount != null">and o.total_amount = #{param2.totalAmount}</if>
+            <if test="param2.payAmount != null">and o.pay_amount = #{param2.payAmount}</if>
+            <if test="param2.payType != null">and o.pay_type = #{param2.payType}</if>
+            <if test="param2.info != null">and o.info = #{param2.info}</if>
+            <if test="param2.state != null">and o.state = #{param2.state}</if>
+            <if test="param2.fkMemberId != null">and o.fk_member_id = #{param2.fkMemberId}</if>
+            <if test="param2.fkCouponsId != null">and o.fk_coupons_id = #{param2.fkCouponsId}</if>
+            <if test="param2.username != null">and o.username = #{param2.username}</if>
+            <if test="param2.created != null">and o.created = #{param2.created}</if>
+            <if test="param2.updated != null">and o.updated = #{param2.updated}</if>
+            or 1=2
+        </where>
+    </update>
+
+    <select id="select" resultType="Order">
+        select
+         (o.id, o.sn, o.total_amount, o.pay_amount, o.pay_type, o.info, o.state,
+        o.fk_member_id, fk_coupons_id, o.username, o.created, o.updated)
+        from
+        lesson.oms_order o
+        <where>
+            <if test="id != null">and o.id = #{id}</if>
+            <if test="sn != null">and o.sn = #{sn}</if>
+            <if test="totalAmount != null">and o.total_amount = #{totalAmount}</if>
+            <if test="payAmount != null">and o.pay_amount = #{payAmount}</if>
+            <if test="payType != null">and o.pay_type = #{payType}</if>
+            <if test="info != null">and o.info = #{info}</if>
+            <if test="state != null">and o.state = #{state}</if>
+            <if test="fkMemberId != null">and o.fk_member_id = #{fkMemberId}</if>
+            <if test="fkCouponsId != null">and o.fk_coupons_id = #{fkCouponsId}</if>
+            <if test="username != null">and o.username = #{username}</if>
+            <if test="created != null">and o.created = #{created}</if>
+            <if test="updated != null">and o.updated = #{updated}</if>
+        </where>
+
+    </select>
+
+</mapper>

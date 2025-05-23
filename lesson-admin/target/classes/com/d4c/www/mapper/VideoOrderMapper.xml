@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.d4c.www.mapper.VideoOrderMapper">
+
+
+    <!--重用SQL片段: VideoOrder表全查片段-->
+    <sql id="list">
+        select
+        vo.video_order_id, vo.fk_order_id, vo.fk_video_id,
+        vo.fk_user_id, vo.create_time, vo.modify_time
+        from lesson.video_order vo
+    </sql>
+
+    <!--分步查询SQL块-->
+    <resultMap id="selectMap" type="VideoOrder">
+        <id property="videoOrderId" column="video_order_id"/>
+        <result property="fkUserId" column="fk_user_id"/>
+        <result property="fkOrderId" column="fk_order_id"/>
+        <result property="fkVideoId" column="fk_video_id"/>
+        <association property="user" column="fk_user_id"
+                     select="com.joezhou.mapper.UserMapper.selectByUserId"/>
+        <association property="order" column="fk_order_id"
+                     select="com.joezhou.mapper.OrderMapper.selectByOrderId"/>
+        <association property="video" column="fk_video_id"
+                     select="com.joezhou.mapper.VideoMapper.selectByVideoId"/>
+    </resultMap>
+
+    <!--添加VideoOrder记录-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="videoOrderId">
+        insert into lesson.video_order (
+        fk_order_id, fk_video_id, fk_user_id, create_time, modify_time )
+        values (
+        #{fkOrderId}, #{fkVideoId}, #{fkUserId}, #{createTime}, #{modifyTime} )
+    </insert>
+
+    <!--按条件查询VideoOrder记录-->
+    <select id="select" resultMap="selectMap">
+        <include refid="list"/>
+        <where>
+            <if test="videoOrderId != null">and vo.video_order_id = #{videoOrderId}</if>
+            <if test="fkOrderId != null">and vo.fk_order_id = #{fkOrderId}</if>
+            <if test="fkVideoId != null">and vo.fk_video_id = #{fkVideoId}</if>
+            <if test="fkUserId != null">and vo.fk_user_id = #{fkUserId}</if>
+            <if test="createTime != null">and vo.create_time = #{createTime}</if>
+            <if test="modifyTime != null">and vo.modify_time = #{modifyTime}</if>
+        </where>
+    </select>
+
+    <!--按条件修改VideoOrder记录-->
+    <update id="update">
+        update lesson.video_order
+        <set>
+            <if test="param1.videoOrderId != null">video_order_id = #{param1.videoOrderId},</if>
+            <if test="param1.fkOrderId != null">fk_order_id = #{param1.fkOrderId},</if>
+            <if test="param1.fkVideoId != null">fk_video_id = #{param1.fkVideoId},</if>
+            <if test="param1.fkUserId != null">fk_user_id = #{param1.fkUserId},</if>
+            <if test="param1.createTime != null">create_time = #{param1.createTime},</if>
+            <if test="param1.modifyTime != null">modify_time = #{param1.modifyTime},</if>
+        </set>
+        <where>
+            <choose>
+                <when test="param2.videoOrderId != null">and video_order_id=#{param2.videoOrderId}</when>
+                <when test="param2.fkOrderId != null">and fk_order_id = #{param2.fkOrderId}</when>
+                <when test="param2.fkVideoId != null">and fk_video_id = #{param2.fkVideoId}</when>
+                <when test="param2.fkUserId != null">and fk_user_id = #{param2.fkUserId}</when>
+                <when test="param2.createTime != null">and create_time = #{param2.createTime}</when>
+                <when test="param2.modifyTime != null">and modify_time = #{param2.modifyTime}</when>
+                <otherwise>or 1 = 2</otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--按条件删除VideoOrder记录-->
+    <delete id="delete">
+        delete from lesson.video_order
+        <where>
+            <choose>
+                <when test="videoOrderId != null">and video_order_id = #{videoOrderId}</when>
+                <when test="fkOrderId != null">and fk_order_id = #{fkOrderId}</when>
+                <when test="fkVideoId != null">and fk_video_id = #{fkVideoId}</when>
+                <when test="fkUserId != null">and fk_user_id = #{fkUserId}</when>
+                <when test="createTime != null">and create_time = #{createTime}</when>
+                <when test="modifyTime != null">and modify_time = #{modifyTime}</when>
+                <otherwise>or 1 = 2</otherwise>
+            </choose>
+        </where>
+    </delete>
+
+    <!--按VideoOrder主键数组批量删除多条VideoOrder记录-->
+    <delete id="deleteByVideoOrderIds">
+        delete from lesson.video_order where video_order_id in
+        <foreach collection="array" item="videoOrderId" open="(" close=")" separator=",">
+            ${videoOrderId}
+        </foreach>
+    </delete>
+
+</mapper>
